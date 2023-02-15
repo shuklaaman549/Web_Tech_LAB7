@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Aman Shukla</title>
+  </head>
+  <body>
+    <h1>Page Visit Counter</h1>
+    <p>You have accessed this page <span id="counter"></span> times. Yay!</p>
+
+    <script>
+      let count = parseInt(localStorage.getItem("accessCount")) || 0;
+
+      count++;
+      localStorage.setItem("accessCount", count);
+
+      const counterElement = document.getElementById("counter");
+      counterElement.innerText = count;
+    </script>
+  </body>
+</html>

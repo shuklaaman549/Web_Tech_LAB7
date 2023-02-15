@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Aman Shukla</title>
+  </head>
+  <body>
+    <h1>My To-Do List</h1>
+    <ul id="list"></ul>
+    <input type="text" id="input" />
+    <button id="button">Add</button>
+
+    <script>
+      let list = JSON.parse(localStorage.getItem("list")) || [];
+
+      const listElement = document.getElementById("list");
+      const inputElement = document.getElementById("input");
+      const buttonElement = document.getElementById("button");
+
+      function renderList() {
+        listElement.innerHTML = "";
+        for (let i = 0; i < list.length; i++) {
+          const item = document.createElement("li");
+          item.innerText = list[i];
+          listElement.appendChild(item);
+        }
+      }
+
+      renderList();
+
+      function addItem() {
+        const value = inputElement.value.trim();
+        if (value !== "") {
+          list.push(value);
+          localStorage.setItem("list", JSON.stringify(list));
+          renderList();
+          inputElement.value = "";
+        }
+      }
+
+      buttonElement.addEventListener("click", addItem);
+
+      inputElement.addEventListener("keyup", (event) => {
+        if (event.key === "Enter") {
+          addItem();
+        }
+      });
+    </script>
+  </body>
+</html>
